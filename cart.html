@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Корзина — Сладкий Мир</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+
+      :root {
+        --primary-color: #ff6b81;
+        --primary-hover: #ff4757;
+        --accent-color: #ffa502;
+        --bg-color: #fff9f5;
+        --card-bg: #ffffff;
+        --text-color: #2f3542;
+        --text-light: #747d8c;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+      }
+
+      /* Шапка */
+      header {
+        background: linear-gradient(135deg, #ff6b81, #ff8e53);
+        color: white;
+        padding: 1.2rem 2rem;
+        box-shadow: 0 4px 15px rgba(255, 107, 129, 0.25);
+      }
+
+      .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 8px 16px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.15);
+        transition: all 0.3s;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        background: white;
+        color: var(--primary-color);
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+      }
+
+      h2 {
+        margin-bottom: 1.5rem;
+        color: var(--text-color);
+      }
+
+      .cart-items {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .cart-item {
+        background: white;
+        padding: 1.2rem 1.5rem;
+        border-radius: 16px;
+        border: 1px solid #ffeaa7;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+      }
+
+      .item-info h4 {
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+      }
+
+      .item-info p {
+        color: var(--text-light);
+        font-size: 0.9rem;
+      }
+
+      .item-controls {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .qty-btn {
+        background: #ffeaa7;
+        border: none;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        font-weight: 700;
+        cursor: pointer;
+        color: #d63031;
+      }
+
+      .btn-remove {
+        background: #ff7675;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .cart-summary {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 20px;
+        border: 2px solid #ffeaa7;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .total-price {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+      }
+
+      .btn-checkout {
+        background: linear-gradient(135deg, #ff6b81, #ff4757);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 25px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
+      }
+
+      .empty-msg {
+        text-align: center;
+        padding: 3rem;
+        background: white;
+        border-radius: 20px;
+        border: 1px dashed #ffeaa7;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="logo">🍰 Сладкий Мир</div>
+        <nav class="nav-links">
+          <a href="index10.html">Каталог</a>
+          <a href="cart.html" class="active"
+            >Корзина <span id="cartCount">(0)</span> 🛒</a
+          >
+          <a href="profile.html">Кабинет 👤</a>
+          <a href="admin.html">Админка ⚙️</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <h2>Ваша корзина 🛒</h2>
+
+      <div id="cartList" class="cart-items"></div>
+
+      <div id="cartSummary" class="cart-summary" style="display: none">
+        <div>
+          <span>Итого к оплате:</span>
+          <div id="totalPrice" class="total-price">0 ₸</div>
+        </div>
+        <button class="btn-checkout" onclick="checkout()">
+          Оформить заказ 🎉
+        </button>
+      </div>
+    </main>
+
+    <script>
+      function getCart() {
+        return JSON.parse(localStorage.getItem("sweet_world_cart")) || [];
+      }
+
+      function saveCart(cart) {
+        localStorage.setItem("sweet_world_cart", JSON.stringify(cart));
+        renderCart();
+      }
+
+      function renderCart() {
+        const cart = getCart();
+        const cartList = document.getElementById("cartList");
+        const cartSummary = document.getElementById("cartSummary");
+        const totalPriceEl = document.getElementById("totalPrice");
+        const cartCountEl = document.getElementById("cartCount");
+
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCountEl.innerText = `(${totalItems})`;
+
+        if (cart.length === 0) {
+          cartList.innerHTML = `<div class="empty-msg"><h3>Ваша корзина пуста 🍩</h3><p style="margin-top:0.5rem;"><a href="index10.html" style="color: #ff6b81;">Перейти в каталог</a></p></div>`;
+          cartSummary.style.display = "none";
+          return;
+        }
+
+        let totalSum = 0;
+        cartList.innerHTML = cart
+          .map((item, index) => {
+            const itemTotal = (item.price || 0) * item.quantity;
+            totalSum += itemTotal;
+
+            return `
+          <div class="cart-item">
+            <div class="item-info">
+              <h4>${item.name}</h4>
+              <p>${item.price} ₸ × ${item.quantity} шт.</p>
+            </div>
+            <div class="item-controls">
+              <button class="qty-btn" onclick="changeQty(${index}, -1)">-</button>
+              <span><b>${item.quantity}</b></span>
+              <button class="qty-btn" onclick="changeQty(${index}, 1)">+</button>
+              <button class="btn-remove" onclick="removeItem(${index})">Удалить</button>
+            </div>
+          </div>
+        `;
+          })
+          .join("");
+
+        totalPriceEl.innerText = `${totalSum} ₸`;
+        cartSummary.style.display = "flex";
+      }
+
+      function changeQty(index, delta) {
+        let cart = getCart();
+        cart[index].quantity += delta;
+        if (cart[index].quantity <= 0) {
+          cart.splice(index, 1);
+        }
+        saveCart(cart);
+      }
+
+      function removeItem(index) {
+        let cart = getCart();
+        cart.splice(index, 1);
+        saveCart(cart);
+      }
+
+      function checkout() {
+        alert(
+          "Спасибо за заказ! Наш кондитер уже начал готовить ваши сладости 🧁",
+        );
+        localStorage.removeItem("sweet_world_cart");
+        renderCart();
+      }
+
+      renderCart();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Админка — Сладкий Мир</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+
+      :root {
+        --primary-color: #ff6b81;
+        --bg-color: #fff9f5;
+        --text-color: #2f3542;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Montserrat", sans-serif;
+      }
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+      }
+
+      header {
+        background: linear-gradient(135deg, #ff6b81, #ff8e53);
+        color: white;
+        padding: 1.2rem 2rem;
+        box-shadow: 0 4px 15px rgba(255, 107, 129, 0.25);
+      }
+      .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+      }
+      .nav-links {
+        display: flex;
+        gap: 1rem;
+      }
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 8px 16px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.15);
+        transition: all 0.3s;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        background: white;
+        color: var(--primary-color);
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+      }
+      .card {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        border: 1px solid #ffeaa7;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+      }
+      .form-group {
+        margin-bottom: 1rem;
+      }
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 10px 15px;
+        border-radius: 10px;
+        border: 1px solid #ffeaa7;
+        font-size: 1rem;
+        outline: none;
+      }
+      .btn-submit {
+        background: linear-gradient(135deg, #ff6b81, #ff4757);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 20px;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="logo">🍰 Сладкий Мир</div>
+        <nav class="nav-links">
+          <a href="index10.html">Каталог</a>
+          <a href="cart.html">Корзина 🛒</a>
+          <a href="profile.html">Кабинет 👤</a>
+          <a href="admin.html" class="active">Админка ⚙️</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <h2>Панель администратора ⚙️</h2>
+      <br />
+      <div class="card">
+        <h3 style="margin-bottom: 1.5rem">Добавить новый товар</h3>
+        <div class="form-group">
+          <label>Название товара</label>
+          <input type="text" placeholder="Например: Капкейк клубничный" />
+        </div>
+        <div class="form-group">
+          <label>Категория</label>
+          <select>
+            <option>Торты</option>
+            <option>Пирожные</option>
+            <option>Выпечка</option>
+            <option>Десерты</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Цена (₸)</label>
+          <input type="number" placeholder="1000" />
+        </div>
+        <button
+          class="btn-submit"
+          onclick="alert('Раздел добавления товаров готов к привязке к базы!')"
+        >
+          Добавить товар ✨
+        </button>
+      </div>
+    </main>
+  </body>
+</html>

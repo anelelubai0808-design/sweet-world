@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Кабинет — Сладкий Мир</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+
+      :root {
+        --primary-color: #ff6b81;
+        --bg-color: #fff9f5;
+        --text-color: #2f3542;
+        --text-light: #747d8c;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Montserrat", sans-serif;
+      }
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+      }
+
+      header {
+        background: linear-gradient(135deg, #ff6b81, #ff8e53);
+        color: white;
+        padding: 1.2rem 2rem;
+        box-shadow: 0 4px 15px rgba(255, 107, 129, 0.25);
+      }
+      .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+      }
+      .nav-links {
+        display: flex;
+        gap: 1rem;
+      }
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 8px 16px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.15);
+        transition: all 0.3s;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        background: white;
+        color: var(--primary-color);
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+      }
+      .card {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        border: 1px solid #ffeaa7;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        margin-bottom: 2rem;
+      }
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+      .avatar {
+        width: 70px;
+        height: 70px;
+        background: #ffeaa7;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="logo">🍰 Сладкий Мир</div>
+        <nav class="nav-links">
+          <a href="index10.html">Каталог</a>
+          <a href="cart.html">Корзина 🛒</a>
+          <a href="profile.html" class="active">Кабинет 👤</a>
+          <a href="admin.html">Админка ⚙️</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      <h2>Личный кабинет 👤</h2>
+      <br />
+      <div class="card user-info">
+        <div class="avatar">🍩</div>
+        <div>
+          <h3>Анель</h3>
+          <p style="color: #747d8c; margin-top: 4px">Любитель сладостей</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-bottom: 1rem">История заказов</h3>
+        <p style="color: #747d8c">У вас пока нет оформленных заказов.</p>
+      </div>
+    </main>
+  </body>
+</html>
